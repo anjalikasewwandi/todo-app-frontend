@@ -68,10 +68,7 @@ const ItemList: React.FC = () => {
           ))}
         </tbody>
       </table>
-      <ItemForm
-        editingItem={editingItem}
-        onFormSubmit={handleFormSubmit}
-      />
+      <ItemForm editingItem={editingItem} onFormSubmit={handleFormSubmit} />
     </div>
   );
 };
