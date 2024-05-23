@@ -1,5 +1,5 @@
-import ItemList from './components/ItemList';
-import './index.css';
+import ItemList from "./components/ItemList";
+import "./index.css";
 
 const App: React.FC = () => {
   return (
@@ -10,4 +10,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-

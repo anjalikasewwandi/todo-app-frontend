@@ -1,8 +1,10 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css");
+
 body {
-    padding: 20px;
-  }
-  
-  .table-buttons {
-    display: flex;
-    justify-content: space-around;
-  }
+  padding: 20px;
+}
+
+.table-buttons {
+  display: flex;
+  justify-content: space-around;
+}
