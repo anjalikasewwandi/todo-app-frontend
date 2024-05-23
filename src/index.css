@@ -1,0 +1,8 @@
+body {
+    padding: 20px;
+  }
+  
+  .table-buttons {
+    display: flex;
+    justify-content: space-around;
+  }

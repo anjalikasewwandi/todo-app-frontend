@@ -6,55 +6,36 @@ interface ItemFormProps {
   onFormSubmit: (item: Item) => void;
 }
 
-function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
+const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
 
-  useEffect(
-    function handleEditingItemChange() {
-      if (editingItem) {
-        setTitle(editingItem.Title);
-        setDescription(editingItem.Description);
-        setStatus(editingItem.Status);
-      }
-    },
-    [editingItem]
-  );
-
-  function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-  }
-
-  function handleDescriptionChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setDescription(event.target.value);
-  }
-
-  function handleStatusChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setStatus(event.target.value);
-  }
+  useEffect(() => {
+    if (editingItem) {
+      setTitle(editingItem.title);
+      setDescription(editingItem.description);
+      setStatus(editingItem.status);
+    } else {
+      setTitle("");
+      setDescription("");
+      setStatus("");
+    }
+  }, [editingItem]);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const item: Item = editingItem
-      ? {
-          ...editingItem,
-          Title: title,
-          Description: description,
-          Status: status,
-        }
-      : { Title: title, Description: description, Status: status };
+      ? { ...editingItem, title, description, status }
+      : { title, description, status };
 
     if (editingItem) {
-      await updateItem(editingItem.Title, item);
+      await updateItem(editingItem.title, item);
     } else {
       const newItem = await createItem(item);
-      item.Title = newItem.Title;
+      item.title = newItem.title;
     }
     onFormSubmit(item);
-    setTitle("");
-    setDescription("");
-    setStatus("");
   }
 
   return (
@@ -65,7 +46,7 @@ function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
           type="text"
           className="form-control"
           value={title}
-          onChange={handleTitleChange}
+          onChange={(e) => setTitle(e.target.value)}
           required
         />
       </div>
@@ -75,7 +56,7 @@ function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
           type="text"
           className="form-control"
           value={description}
-          onChange={handleDescriptionChange}
+          onChange={(e) => setDescription(e.target.value)}
           required
         />
       </div>
@@ -85,15 +66,16 @@ function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
           type="text"
           className="form-control"
           value={status}
-          onChange={handleStatusChange}
+          onChange={(e) => setStatus(e.target.value)}
           required
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        {editingItem ? "Update" : "Add"} Task
+        {editingItem ? "Update" : "Add"} Item
       </button>
     </form>
   );
-}
+};
 
 export default ItemForm;
+
