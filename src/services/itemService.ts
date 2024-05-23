@@ -18,15 +18,15 @@ export async function getItem(Title: string) {
   return response.data;
 }
 
-export async function createUser(Item: Item) {
+export async function createItem(Item: Item) {
   const response = await axios.post<Item>(API_URL, Item);
   return response.data;
 }
 
-export async function updateUser(Title: string, Item: Item) {
+export async function updateItem(Title: string, Item: Item) {
   await axios.put(`${API_URL}/${Title}`, Item); // Send a PUT request to the API endpoint with the user ID and updated user data
 }
 
-export async function deleteUser(Title: string) {
+export async function deleteItem(Title: string) {
   await axios.delete(`${API_URL}/${Title}`); // Send a DELETE request to the API endpoint with the specified user ID
 }
