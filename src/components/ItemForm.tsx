@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createItem, updateItem, Item } from "../services/itemService";
+import { updateItem, createItem, Item } from "../services/itemService";
 
 interface ItemFormProps {
   editingItem: Item | null;
@@ -25,17 +25,26 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const item: Item = editingItem
-      ? { ...editingItem, title, description, status }
-      : { title, description, status };
+    const item: Item = {
+      title,
+      description,
+      status
+    };
 
-    if (editingItem) {
-      await updateItem(editingItem.title, item);
-    } else {
-      const newItem = await createItem(item);
-      item.title = newItem.title;
+    try {
+      if (editingItem) {
+        await updateItem(editingItem.title, item);
+        onFormSubmit(item);
+      } else {
+        const newItem = await createItem(item);
+        setTitle("");
+        setDescription("");
+        setStatus("");
+        onFormSubmit(newItem);
+      }
+    } catch (error) {
+      console.error("Error updating item:", error);
     }
-    onFormSubmit(item);
   }
 
   return (
@@ -78,3 +87,4 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
 };
 
 export default ItemForm;
+

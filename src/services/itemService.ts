@@ -30,3 +30,4 @@ export async function updateItem(title: string, item: Item) {
 export async function deleteItem(title: string) {
   await axios.delete(`${API_URL}/${title}`); 
 }
+
