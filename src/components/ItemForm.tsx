@@ -31,13 +31,17 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
       status
     };
 
-    if (editingItem) {
-      await updateItem(editingItem.title, item);
-    } else {
-      const newItem = await createItem(item);
-      item.title = newItem.title;
+    try {
+      if (editingItem) {
+        await updateItem(editingItem.title, item);
+      } else {
+        const newItem = await createItem(item);
+        item.title = newItem.title;
+      }
+      onFormSubmit(item);
+    } catch (error) {
+      console.error("Failed to update or create item", error);
     }
-    onFormSubmit(item);
   }
 
   return (

@@ -25,7 +25,14 @@ const ItemList: React.FC = () => {
 
   const handleFormSubmit = (item: Item) => {
     if (editingItem) {
-      setItems(items.map((i) => (i.title === item.title ? item : i)));
+      // Find the index of the old item
+      const index = items.findIndex((i) => i.title === editingItem.title);
+      if (index !== -1) {
+        // Create a new array with the updated item
+        const updatedItems = [...items];
+        updatedItems[index] = item;
+        setItems(updatedItems);
+      }
     } else {
       setItems([...items, item]);
     }
