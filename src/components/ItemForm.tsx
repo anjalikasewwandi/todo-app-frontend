@@ -1,39 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { updateItem, createItem, Item } from "../services/itemService";
 
-// Define the props for the ItemForm component
 interface ItemFormProps {
   editingItem: Item | null;
   onFormSubmit: (item: Item) => void;
 }
 
-// Define the functional component ItemForm
-function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
+const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
 
-  useEffect(
-    function () {
-      if (editingItem) {
-        setTitle(editingItem.title);
-        setDescription(editingItem.description);
-        setStatus(editingItem.status);
-      } else {
-        setTitle("");
-        setDescription("");
-        setStatus("");
-      }
-    },
-    [editingItem]
-  );
+  useEffect(() => {
+    if (editingItem) {
+      setTitle(editingItem.title);
+      setDescription(editingItem.description);
+      setStatus(editingItem.status);
+    } else {
+      setTitle("");
+      setDescription("");
+      setStatus("");
+    }
+  }, [editingItem]);
+
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setStatus("");
+  };
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const item: Item = {
       title,
       description,
-      status,
+      status
     };
 
     try {
@@ -44,38 +45,39 @@ function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
         item.title = newItem.title;
       }
       onFormSubmit(item);
+      resetForm(); // Reset form after successful submission
     } catch (error) {
       console.error("Failed to update or create item", error);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <div className="form-group">
-        <label>Title</label>
+        <label className="form-label">Title</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control custom-input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
       </div>
       <div className="form-group">
-        <label>Description</label>
+        <label className="form-label">Description</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control custom-input"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
       </div>
       <div className="form-group">
-        <label>Status</label>
+        <label className="form-label">Status</label>
         <input
           type="text"
-          className="form-control"
+          className="form-control custom-input"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           required
@@ -86,6 +88,6 @@ function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
       </button>
     </form>
   );
-}
+};
 
 export default ItemForm;

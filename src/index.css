@@ -8,3 +8,42 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: rgb(66, 8, 68);
+}
+
+.todo-header {
+  margin-right: auto; 
+  margin-left: 20px;
+  margin-bottom: auto; 
+  margin-top: auto; 
+  color: #f5f1f1;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  margin-left: auto; 
+  margin-right: 10px;
+}
+
+.form-label {
+  color: #f3f0f0;
+  font-weight: bold;
+}
+
+.custom-input {
+  border: 1px solid; 
+}
+
+
+
+
+
+
+
