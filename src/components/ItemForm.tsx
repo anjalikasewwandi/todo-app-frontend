@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { updateItem, createItem, Item } from "../services/itemService";
 
+// Define the props for the ItemForm component
 interface ItemFormProps {
   editingItem: Item | null;
   onFormSubmit: (item: Item) => void;
 }
 
-const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
+// Define the functional component ItemForm
+function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
 
-  useEffect(() => {
-    if (editingItem) {
-      setTitle(editingItem.title);
-      setDescription(editingItem.description);
-      setStatus(editingItem.status);
-    } else {
-      setTitle("");
-      setDescription("");
-      setStatus("");
-    }
-  }, [editingItem]);
+  useEffect(
+    function () {
+      if (editingItem) {
+        setTitle(editingItem.title);
+        setDescription(editingItem.description);
+        setStatus(editingItem.status);
+      } else {
+        setTitle("");
+        setDescription("");
+        setStatus("");
+      }
+    },
+    [editingItem]
+  );
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const item: Item = {
       title,
       description,
-      status
+      status,
     };
 
     try {
@@ -81,7 +86,6 @@ const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
       </button>
     </form>
   );
-};
+}
 
 export default ItemForm;
-

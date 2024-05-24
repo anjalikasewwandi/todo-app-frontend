@@ -1,34 +1,46 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getItems, deleteItem, Item } from "../services/itemService";
 import ItemForm from "./ItemForm";
 
-const ItemList: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([]);
-  const [editingItem, setEditingItem] = useState<Item | null>(null);
+function ItemList() {
+  // Defining a functional component named ItemList
 
-  useEffect(() => {
-    const fetchItems = async () => {
+  // State variables to manage items and editing state
+  const [items, setItems] = useState<Item[]>([]); // Initialize state variable to store list of items
+  const [editingItem, setEditingItem] = useState<Item | null>(null); // Initialize state variable to store item being edited or null
+
+  // UseEffect hook: Fetches items when the component is first displayed on the screen.
+  useEffect(function fetchItems() {
+    async function fetchData() {
       const items = await getItems();
       setItems(items);
-    };
-    fetchItems();
+    }
+    fetchData();
   }, []);
 
-  const handleDelete = async (title: string) => {
-    await deleteItem(title);
-    setItems(items.filter((item) => item.title !== title));
-  };
+  // Function to handle item deletion
+  function handleDelete(title: string) {
+    deleteItem(title).then(function () {
+      setItems(
+        items.filter(function (item) {
+          return item.title !== title;
+        })
+      );
+    });
+  }
 
-  const handleEdit = (item: Item) => {
+  // Function to handle editing an item
+  function handleEdit(item: Item) {
     setEditingItem(item);
-  };
+  }
 
-  const handleFormSubmit = (item: Item) => {
+  // Function to handle form submission for adding/editing items
+  function handleFormSubmit(item: Item) {
     if (editingItem) {
-      // Find the index of the old item
-      const index = items.findIndex((i) => i.title === editingItem.title);
+      const index = items.findIndex(function (i) {
+        return i.title === editingItem.title;
+      });
       if (index !== -1) {
-        // Create a new array with the updated item
         const updatedItems = [...items];
         updatedItems[index] = item;
         setItems(updatedItems);
@@ -37,8 +49,9 @@ const ItemList: React.FC = () => {
       setItems([...items, item]);
     }
     setEditingItem(null);
-  };
+  }
 
+  // JSX rendering of the component
   return (
     <div>
       <h1>Items</h1>
@@ -52,32 +65,34 @@ const ItemList: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
-            <tr key={item.title}>
-              <td>{item.title}</td>
-              <td>{item.description}</td>
-              <td>{item.status}</td>
-              <td className="table-buttons">
-                <button
-                  className="btn btn-warning"
-                  onClick={() => handleEdit(item)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(item.title)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {items.map(function (item) {
+            return (
+              <tr key={item.title}>
+                <td>{item.title}</td>
+                <td>{item.description}</td>
+                <td>{item.status}</td>
+                <td className="table-buttons">
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => handleEdit(item)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(item.title)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <ItemForm editingItem={editingItem} onFormSubmit={handleFormSubmit} />
     </div>
   );
-};
+}
 
 export default ItemList;
