@@ -75,14 +75,14 @@ function ItemList() {
               <td className="table-buttons">
                 {/* Button to edit the item */}
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning custom-edit-button"
                   onClick={() => handleEdit(item)}
                 >
                   Edit
                 </button>
                 {/* Button to delete the item */}
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger custom-delete-button"
                   onClick={() => handleDelete(item.title)}
                 >
                   Delete

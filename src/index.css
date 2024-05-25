@@ -16,21 +16,21 @@ body {
   align-items: center;
   height: 60px;
   width: 100%;
-  background-color: rgb(66, 8, 68);
+  background-color: #301934;
 }
 
 .todo-header {
-  margin-right: auto; 
+  margin-right: auto;
   margin-left: 20px;
-  margin-bottom: auto; 
-  margin-top: auto; 
+  margin-bottom: auto;
+  margin-top: auto;
   color: #f5f1f1;
 }
 
 .logo {
   width: 100px;
   height: auto;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: 20px;
 }
 
@@ -40,11 +40,31 @@ body {
 }
 
 .custom-input {
-  border: 1px solid; 
+  border: 1px solid;
 }
 
+button.custom-btn {
+  background-color: #790252 !important;
+  color: white !important;
+  font-weight: bold;
+}
 
+button.custom-btn:hover {
+  background-color: #E80F88 !important; 
+}
 
+.custom-edit-button {
+  background-color: #790252!important;
+  border-color: #790252 !important;
+  color: white !important;
+  font-weight: bold;
+}
 
+.custom-delete-button {
+  background-color: #DC0000 !important;
+  border-color: #DC0000 !important;
+  color: white !important;
+  font-weight: bold;
+} 
 
 
