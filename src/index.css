@@ -10,6 +10,7 @@ body {
 }
 
 .header-container {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,10 +28,10 @@ body {
 }
 
 .logo {
-  width: 50px;
+  width: 100px;
   height: auto;
   margin-left: auto; 
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .form-label {
