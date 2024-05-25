@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getItems, deleteItem, Item } from "../services/itemService";
 import ItemForm from "./ItemForm";
 import logo from "../assets/logo.png";
 
 
-const ItemList: React.FC = () => {
+function ItemList() {
   const [items, setItems] = useState<Item[]>([]);
   const [editingItem, setEditingItem] = useState<Item | null>(null);
 

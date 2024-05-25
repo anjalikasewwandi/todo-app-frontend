@@ -6,7 +6,7 @@ interface ItemFormProps {
   onFormSubmit: (item: Item) => void;
 }
 
-const ItemForm: React.FC<ItemFormProps> = ({ editingItem, onFormSubmit }) => {
+function ItemForm({ editingItem, onFormSubmit }: ItemFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
