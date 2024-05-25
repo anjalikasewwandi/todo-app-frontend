@@ -44,7 +44,7 @@ body {
 }
 
 button.custom-btn {
-  background-color: #790252 !important;
+  background-color: #75024f !important;
   color: white !important;
   font-weight: bold;
 }
@@ -54,10 +54,14 @@ button.custom-btn:hover {
 }
 
 .custom-edit-button {
-  background-color: #790252!important;
+  background-color: #75024f !important;
   border-color: #790252 !important;
   color: white !important;
   font-weight: bold;
+}
+
+.custom-edit-button:hover{
+  background-color: #940754 !important; 
 }
 
 .custom-delete-button {
@@ -66,5 +70,9 @@ button.custom-btn:hover {
   color: white !important;
   font-weight: bold;
 } 
+
+.custom-delete-button:hover {
+  background-color: #e2370c !important;
+}
 
 
